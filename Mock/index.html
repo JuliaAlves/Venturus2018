@@ -1,0 +1,158 @@
+<html>
+<head>
+    <title>Mock</title>
+    <!-- style -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+
+    <!-- scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js" integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark ">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/logo-h-vjobs.png" width="100" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link text-white" href="#">Vagas</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#">Sobre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-2">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#register" aria-expanded="false" aria-controls="register">Nova vaga</button>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <div class="collapse multi-collapse" id="register">
+                    <div class="card">
+                        <div class="card-tittle mt-3 ml-3">
+                            <h5>Cadastro</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <form action="#">
+                                <div class="form-group">
+                                    <label for="name">Nome</label>
+                                    <input type="text" class="form-control" name="name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="desc">Descrição</label>
+                                    <textarea name="desc" cols="40" class="form-control" rows="4"></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="hab">Habilidades necessárias</label>
+                                        <textarea name="hab" cols="20" class="form-control" rows="4"></textarea>
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="dif">Diferencial</label>
+                                        <textarea name="dif" cols="20" class="form-control" rows="4"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                            <label for="sal">Salário Base</label>
+                                            <input type="text" class="form-control" name="sal">
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="area">Área</label>
+                                        <select name="area" class="form-control"></select>
+                                    </div>
+                                </div>
+                                    
+                                <div class="float-right mt-2">
+                                    <button type="submit" class="btn btn-success">Criar vaga</button>                                                                   
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/developer.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Desenvolvedor Front-end JR</h5>
+                        <p class="card-text">
+                            <b>Descrição:</b>
+                            <p>Profissional que goste de trabalhar em um ambiênte dinâmico com desenvolvimento de software
+                                e que tenha experiencia em desenvolvimento full-stack.
+                            </p>
+                            <b>Salário base:</b>
+                            <p>R$ 10,00</p>
+                        </p>
+                        <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/designer.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Designer UI/UX PL</h5>
+                        <p class="card-text">
+                            <b>Descrição:</b>
+                            <p>Profissional que goste de trabalhar em um ambiênte dinâmico com desenvolvimento de software
+                                e que tenha experiencia em desenvolvimento full-stack.
+                            </p>
+                            <b>Salário base:</b>
+                            <p>R$ 100,00</p>
+                        </p>
+                        <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="card">
+                    <img class="card-img-top" src="img/tester.png" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">Tester - Estágio</h5>
+                        <p class="card-text">
+                            <b>Descrição:</b>
+                            <p>Profissional que goste de trabalhar em um ambiênte dinâmico com desenvolvimento de software
+                                e que tenha experiencia em desenvolvimento full-stack.
+                            </p>
+                            <b>Salário base:</b>
+                            <p>R$ 2,00</p>
+                        </p>
+                        <a href="#" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
