@@ -24,13 +24,12 @@ app.get('/vagas', async(req, res) => {
 app.get('/vaga/:id', async(req, res) => {
     try {
         let id = req.params.id;
-        var i=0;
-        for(; i< vagas.length ;i++){
-            if (vagas[i]["id"] == id)
-                break;
-        }
+        let found = vagas.find(v => { return v.id === id;});
+        
+        if (found !== undefined)
+            return res.send(found);
 
-        return res.send(vagas[i]);
+        return res.status(404).send('Not found');
     } catch (error){
         console.log(error.message);
     }
@@ -42,17 +41,16 @@ app.put('/altVaga/:id', async(req, res) => {
     try {
         
         let id = req.params.id;
-        var i=0;
-        for(; i< vagas.length ;i++){
-            if (vagas[i]["id"] == id)
-                break;
-        }
+        let found = vagas.find(v => { return v.id === id;});
 
         let vaga = createVaga(req.body);
 
-        vagas[i] = vaga;
+        if (found !== undefined){
+            vagas[vagas.indexOf(found)] = vaga;
+            return res.send('Alterado');
+        }
 
-        res.send('OK');
+        return res.status(404).send('Not found');
 
     } catch (error){
         console.log(error.message);
@@ -63,27 +61,30 @@ app.delete('/delVaga/:id', async(req, res) => {
     try {
         let vagasLenght = vagas.length;
         let id = req.params.id;
-        var i=0;
-        for(; i< vagas.length ;i++){
-            if (vagas[i]["id"] == id)
-                break;
+        let found = vagas.find(v => { return v.id === id;});
+
+        if(found !== undefined){
+            vagas.splice(vagas.indexOf(found), 1);
+            if(vagas.length < vagasLenght) 
+                return res.send('Deleted');
+            
+            return res.status(500).send('Internal error');
         }
 
-        vagas.splice(i, 1);
-        if(vagas.length < vagasLenght) return res.send('Deleted');
-        return res.status(500).send('Internal error');
+        return res.status(404).send('Not found');
     } catch (error){
         console.log(error.message);
     }
     
 });
 
-app.post('/vagas', async(req, res) =>{
+app.post('/addVaga', async(req, res) =>{
     try{
         let vagasLenght = vagas.length;
         let vaga = createVaga(req.body);
         vagas.push(vaga);
-        if(vagas.length > vagasLenght) return res.send('Added');
+        if(vagas.length > vagasLenght) 
+            return res.send('Added');
         return res.status(500).send('Internal error');
     }catch(error){
         return res.status(500).send('Internal error');
