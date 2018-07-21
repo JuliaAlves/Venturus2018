@@ -19,13 +19,8 @@ module.exports = app =>{
 
     app.get('/vagas/:id', async(req, res) => {
         try {
-            let id = req.params.id;
-            let found = vagas.find(v => { return v.id === id;});
-            
-            if (found !== undefined)
-                return res.send(found);
-
-            return res.status(404).send('Not found');
+            const docs = await vagasCollection.doc(req.params.id).get();
+            return res.send(extractVaga(docs));
         } catch (error){
             return res.status(500).send(error.message);
         }        
@@ -36,13 +31,11 @@ module.exports = app =>{
         try {
             
             let id = req.params.id;
-            let found = vagas.find(v => { return v.id === id;});
+            const docs = await vagasCollection.doc(id).get();
 
-            if (found !== undefined){
-                let index = vagas.indexOf(found);
-                Object.keys(req.body).forEach(job => {
-                    vagas[index][job] = req.body[job]
-                })
+            if (docs !== undefined){
+                vagasCollection.doc(id).update(req.body);
+
                 return res.send('Alterado');
             }
 
@@ -54,20 +47,19 @@ module.exports = app =>{
     });
 
     app.delete('/vagas/:id', async(req, res) => {
-        try {
-            let vagasLenght = vagas.length;
+        try{
             let id = req.params.id;
-            let found = vagas.find(v => { return v.id === id;});
+            const docs = await vagasCollection.doc(id).get();
+            if (docs == null)
+                return res.status(405).send('Not Found');
 
-            if(found !== undefined){
-                vagas.splice(vagas.indexOf(found), 1);
-                if(vagas.length < vagasLenght) 
-                    return res.send('Deleted');
-                
-                return res.status(500).send('Internal error');
-            }
+            const fbReturn = await vagasCollection.doc(id).delete();
 
-            return res.status(404).send('Not found');
+            if (fbReturn)
+                return res.send('Deleted');
+
+            
+            return res.status(500).send('Internal error');
         } catch (error){
             return res.status(500).send(error.message);
         }
@@ -94,6 +86,7 @@ module.exports = app =>{
             id: vaga.id,
             name: v.name,
             description: v.description,
+            salary: v.salary,
             skills: v.skills,
             area: v.area,
             differentials: v.differentials,
@@ -101,5 +94,5 @@ module.exports = app =>{
             isActive: v.isActive
         }
     };
-    const createVaga = (obj) => new Vaga(obj.id, obj.name, obj.description, obj.skills, obj.area, obj.differentials, obj.isPcd, obj.isActive);
+    const createVaga = (obj) => new Vaga(obj.id, obj.name, obj.description, obj.salary,obj.skills, obj.area, obj.differentials, obj.isPcd, obj.isActive);
 }

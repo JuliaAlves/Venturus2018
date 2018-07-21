@@ -1,7 +1,8 @@
 class Vaga {
-    constructor(name, description, skills, area, differentials, isPcd, isActive){
+    constructor(name, description, salary, skills, area, differentials, isPcd, isActive){
         this.name = name;
         this.description = description;
+        this.salary = salary;
         this.skills = skills; 
         this.area = area;
         this.differentials = differentials;
