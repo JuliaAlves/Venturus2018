@@ -20,7 +20,12 @@ module.exports = app =>{
     app.get('/vagas/:id', async(req, res) => {
         try {
             const docs = await vagasCollection.doc(req.params.id).get();
-            return res.send(extractVaga(docs));
+            if(docs.exists)
+                return res.send(extractVaga(docs));
+            
+                
+                return res.status(405).send('Not Found');
+
         } catch (error){
             return res.status(500).send(error.message);
         }        
@@ -33,10 +38,12 @@ module.exports = app =>{
             let id = req.params.id;
             const docs = await vagasCollection.doc(id).get();
 
-            if (docs !== undefined){
-                vagasCollection.doc(id).update(req.body);
-
-                return res.send('Alterado');
+            if (docs.exists){
+                let ret = vagasCollection.doc(id).update(req.body);
+                if(ret)
+                    return res.send('Alterado');
+                else 
+                return res.status(500).send('Internal Error'); 
             }
 
             return res.status(404).send('Not found');
@@ -50,7 +57,7 @@ module.exports = app =>{
         try{
             let id = req.params.id;
             const docs = await vagasCollection.doc(id).get();
-            if (docs == null)
+            if (!docs.exists)
                 return res.status(405).send('Not Found');
 
             const fbReturn = await vagasCollection.doc(id).delete();
