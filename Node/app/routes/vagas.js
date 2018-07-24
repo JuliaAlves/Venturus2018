@@ -74,17 +74,13 @@ module.exports = app =>{
     });
 
     app.post('/vagas', async(req, res) =>{
-        try{
-            let fbReturn = await vagasCollection.doc().set(req.body);
-            if (fbReturn)
-                return res.send('Sucess');
-            else
-                throw Error;
-
-            
-        }catch(error){
-            return res.status(500).send(error.message);
-        }
+            vagasCollection.add(req.body)
+            .then( ref => {
+                return res.send(ref.id);
+	    })
+            .catch(error =>{
+            	return res.status(500).send(error.message);
+            });
     });
 
     const extractVaga = (vaga) => {
