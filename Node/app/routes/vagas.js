@@ -1,6 +1,7 @@
 'use strict'
 
 const Vaga = require('../../model/vaga.js');
+const auth = require('../../config/security/tokenValidator');
 
 module.exports = app =>{
     const vagasCollection = app.config.firebaseConfig.collection('vagas');
@@ -31,7 +32,7 @@ module.exports = app =>{
         }        
     });
 
-    app.put('/vagas/:id', async(req, res) => {
+    app.put('/vagas/:id', auth, async(req, res, next) => {
 
         try {
             
@@ -53,7 +54,7 @@ module.exports = app =>{
         }
     });
 
-    app.delete('/vagas/:id', async(req, res) => {
+    app.delete('/vagas/:id', auth, async(req, res, next) => {
         try{
             let id = req.params.id;
             const docs = await vagasCollection.doc(id).get();
@@ -73,7 +74,7 @@ module.exports = app =>{
         
     });
 
-    app.post('/vagas', async(req, res) =>{
+    app.post('/vagas', auth, async(req, res, next) =>{
             vagasCollection.add(req.body)
             .then( ref => {
                 return res.send(ref.id);
